@@ -1,0 +1,105 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>RasRoboコントローラー</title>
+    </head>
+
+    <body>
+        <p>ボタンを押すとRasRoboが動くよ！</p>
+        <button id="left_forward" type="button" onClick="left_forward()">左前</button>
+        <button id="forward" type="button" onClick="forward()">前進</button>
+        <button id="right_forward" type="button" onClick="right_forward()">右前</button>
+        <p>
+          <button type="button">*</button>
+          <button id="stop" type="button" onClick="stop()">停止</button>
+          <button type="button">*</button>
+        </p>
+        <button id="left_back" type="button" onClick="left_back() ">左後</button>
+        <button id="back" type="button" onClick="back()">後進</button>
+        <button id="right_back" type="button" onClick="right_back() ">右後</button>
+
+        <script type="text/javascript" src="/webiopi.js"></script>
+        <script type="text/javascript" src="/jquery.js"></script>
+        <script type="text/javascript">
+            var webiopi = webiopi();
+            webiopi.ready(function() {
+               webiopi.refreshGPIO(true);
+               webiopi.setFunction(8, "OUT");
+               webiopi.setFunction(7, "OUT");
+               webiopi.setFunction(23, "OUT");
+               webiopi.setFunction(24, "OUT");
+            });
+            function forward() {
+                    webiopi.digitalWrite(8, 1);
+                    webiopi.digitalWrite(7, 0);
+                    webiopi.digitalWrite(23, 1);
+                    webiopi.digitalWrite(24, 0);
+                    button_color("#forward");
+            }
+            function back() {
+                    webiopi.digitalWrite(8, 0);
+                    webiopi.digitalWrite(7, 1);
+                    webiopi.digitalWrite(23, 0);
+                    webiopi.digitalWrite(24, 1);
+                    button_color("#back");
+            }
+            function stop() {
+                    webiopi.digitalWrite(8, 0);
+                    webiopi.digitalWrite(7, 0);
+                    webiopi.digitalWrite(23, 0);
+                    webiopi.digitalWrite(24, 0);
+                    button_color("#stop");
+            }
+            function right_forward() {
+                    webiopi.digitalWrite(8, 1);
+                    webiopi.digitalWrite(7, 0);
+                    webiopi.digitalWrite(23, 0);
+                    webiopi.digitalWrite(24, 0);
+                    button_color("#right_forward");
+            }
+            function left_forward() {
+                    webiopi.digitalWrite(8, 0);
+                    webiopi.digitalWrite(7, 0);
+                    webiopi.digitalWrite(23, 1);
+                    webiopi.digitalWrite(24, 0);
+                    button_color("#left_forward");
+            }
+            function right_back() {
+                    webiopi.digitalWrite(8, 0);
+                    webiopi.digitalWrite(7, 1);
+                    webiopi.digitalWrite(23, 0);
+                    webiopi.digitalWrite(24, 0);
+                    button_color("#right_back");
+            }
+            function left_back() {
+                    webiopi.digitalWrite(8, 0);
+                    webiopi.digitalWrite(7, 0);
+                    webiopi.digitalWrite(23, 0);
+                    webiopi.digitalWrite(24, 1);
+                    button_color("#left_back");
+            }
+            var last_id = "";
+            function button_color(id) {
+              $(last_id).css('background', "#808080");
+              $(id).css('background', "#CC0033");
+              last_id = id;
+            }
+        </script>
+        <style type="text/css">
+            button {
+                display: inline;
+                margin: 5px 5px 5px 5px;
+                width: 80px;
+                height: 45px;
+                border-radius: 10px;
+                font-size: 12pt;
+                font-weight: bold;
+                color: white;
+                background-color:#808080
+            }
+            body {
+                background-color:#C0C0C0
+            }
+        </style>
+    </body>
+</html>
