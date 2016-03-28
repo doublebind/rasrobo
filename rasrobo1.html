@@ -1,0 +1,37 @@
+<body>
+    <p>ボタンを押すとRasRoboが動くよ！</p>
+    <button type="button" onClick="forward()">前進</button>
+    <script type="text/javascript" src="/webiopi.js"></script>
+    <script type="text/javascript">
+        var webiopi = webiopi();
+        webiopi.ready(function() {
+           webiopi.refreshGPIO(true);
+           webiopi.setFunction(8, "OUT");
+           webiopi.setFunction(7, "OUT");
+           webiopi.setFunction(23, "OUT");
+           webiopi.setFunction(24, "OUT");
+        });
+        function forward() {
+                webiopi.digitalWrite(8, 1);
+                webiopi.digitalWrite(7, 0);
+                webiopi.digitalWrite(23, 1);
+                webiopi.digitalWrite(24, 0);
+        }
+    </script>
+    <style type="text/css">
+        button {
+            display: inline;
+            margin: 5px 5px 5px 5px;
+            width: 80px;
+            height: 45px;
+            border-radius: 10px;
+            font-size: 12pt;
+            font-weight: bold;
+            color: white;
+            background-color:#808080
+        }
+        body {
+            background-color:#C0C0C0
+        }
+    </style>
+</body>

@@ -1,0 +1,80 @@
+<body>
+    <p>ボタンを押すとRasRoboが動くよ！</p>
+    <button type="button" onClick="right_forward()">右前</button>
+    <button type="button" onClick="forward()">前進</button>
+    <button type="button" onClick="left_forward()">左前</button>
+    <button type="button" onClick="stop()">停止</button>
+    <button type="button" onClick="right_back() ">右後</button>
+    <button type="button" onClick="back()">後進</button>
+    <button type="button" onClick="left_back() ">左後</button>
+
+    <script type="text/javascript" src="/webiopi.js"></script>
+    <script type="text/javascript">
+        var webiopi = webiopi();
+        webiopi.ready(function() {
+           webiopi.refreshGPIO(true);
+           webiopi.setFunction(8, "OUT");
+           webiopi.setFunction(7, "OUT");
+           webiopi.setFunction(23, "OUT");
+           webiopi.setFunction(24, "OUT");
+        });
+        function forward() {
+                webiopi.digitalWrite(8, 1);
+                webiopi.digitalWrite(7, 0);
+                webiopi.digitalWrite(23, 1);
+                webiopi.digitalWrite(24, 0);
+        }
+        function back() {
+                webiopi.digitalWrite(8, 0);
+                webiopi.digitalWrite(7, 1);
+                webiopi.digitalWrite(23, 0);
+                webiopi.digitalWrite(24, 1);
+        }
+        function stop() {
+                webiopi.digitalWrite(8, 0);
+                webiopi.digitalWrite(7, 0);
+                webiopi.digitalWrite(23, 0);
+                webiopi.digitalWrite(24, 0);
+        }
+        function right_forward() {
+                webiopi.digitalWrite(8, 1);
+                webiopi.digitalWrite(7, 0);
+                webiopi.digitalWrite(23, 0);
+                webiopi.digitalWrite(24, 0);
+        }
+        function left_forward() {
+                webiopi.digitalWrite(8, 0);
+                webiopi.digitalWrite(7, 0);
+                webiopi.digitalWrite(23, 1);
+                webiopi.digitalWrite(24, 0);
+        }
+        function right_back() {
+                webiopi.digitalWrite(8, 0);
+                webiopi.digitalWrite(7, 1);
+                webiopi.digitalWrite(23, 0);
+                webiopi.digitalWrite(24, 0);
+        }
+        function left_back() {
+                webiopi.digitalWrite(8, 0);
+                webiopi.digitalWrite(7, 0);
+                webiopi.digitalWrite(23, 0);
+                webiopi.digitalWrite(24, 1);
+        }
+    </script>
+    <style type="text/css">
+        button {
+            display: inline;
+            margin: 5px 5px 5px 5px;
+            width: 80px;
+            height: 45px;
+            border-radius: 10px;
+            font-size: 12pt;
+            font-weight: bold;
+            color: white;
+            background-color:#808080
+        }
+        body {
+            background-color:#C0C0C0
+        }
+    </style>
+</body>
