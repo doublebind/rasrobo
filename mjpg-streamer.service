@@ -1,0 +1,11 @@
+[Unit]
+Description = MJPG Streamer 
+After = syslog.target
+
+[Service]
+Type = simple
+Restart = always
+ExecStart = /home/pi/mjpg-streamer/webcam.sh 
+
+[Install]
+WantedBy = multi-user.target
